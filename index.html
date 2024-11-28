@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pranav Kulkarni | Personal Website</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-blue': '#3B82F6',
+                        'brand-gray': '#4B5563'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Typing Animation */
+        .typing-text {
+            border-right: 3px solid #3B82F6;
+            white-space: nowrap;
+            overflow: hidden;
+            margin: 0 auto;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #3B82F6 }
+        }
+
+        /* Skill Bar Animation on Hover */
+        .skill-bar:hover .skill-progress {
+            transform: scaleX(1.03);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+        }
+
+        .skill-progress {
+            transition: all 0.3s ease;
+            transform-origin: left;
+        }
+
+        /* Card Tilt Effect */
+        .tilt-card {
+            transform-style: preserve-3d;
+            transition: all 0.3s ease;
+        }
+
+        .tilt-card:hover {
+            transform: perspective(1000px) rotateX(5deg) rotateY(5deg);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Particle Background */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Ensure content stays above particles */
+        .content-wrapper {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Loading Animation Styles */
+        .loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1.2s ease-in-out;
+        }
+
+        .circuit-loader {
+            width: 200px;
+            height: 200px;
+            position: relative;
+        }
+
+        .circuit-loader:before,
+        .circuit-loader:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid transparent;
+        }
+
+        .circuit-loader:before {
+            border-top-color: #3B82F6;
+            animation: circuit-spin 2s linear infinite;
+        }
+
+        .circuit-loader:after {
+            border-right-color: #3B82F6;
+            animation: circuit-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        .circuit-paths {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            animation: circuit-glow 2s linear infinite;
+        }
+
+        .circuit-path {
+            position: absolute;
+            background: #3B82F6;
+            opacity: 0;
+        }
+
+        .path-1 {
+            top: 50%;
+            left: 10%;
+            width: 30%;
+            height: 3px;
+            animation: path-animate 2s infinite;
+        }
+
+        .path-2 {
+            top: 20%;
+            right: 10%;
+            width: 3px;
+            height: 30%;
+            animation: path-animate 2s infinite 0.4s;
+        }
+
+        .path-3 {
+            bottom: 20%;
+            right: 10%;
+            width: 3px;
+            height: 30%;
+            animation: path-animate 2s infinite 0.8s;
+        }
+
+        .loading-text {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #3B82F6;
+            font-size: 1.2rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            animation: text-fade 2s infinite;
+        }
+
+        @keyframes circuit-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes circuit-pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.5; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes circuit-glow {
+            0%, 100% { box-shadow: 0 0 20px #3B82F6; }
+            50% { box-shadow: 0 0 40px #3B82F6; }
+        }
+
+        @keyframes path-animate {
+            0% { opacity: 0; transform: scaleX(0); }
+            20% { opacity: 1; transform: scaleX(1); }
+            80% { opacity: 1; transform: scaleX(1); }
+            100% { opacity: 0; transform: scaleX(0); }
+        }
+
+        @keyframes text-fade {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .loader-hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans leading-normal tracking-normal">
+    <!-- Loading Screen -->
+    <div class="loader-wrapper">
+        <div class="circuit-loader">
+            <div class="circuit-paths">
+                <div class="circuit-path path-1"></div>
+                <div class="circuit-path path-2"></div>
+                <div class="circuit-path path-3"></div>
+            </div>
+            <div class="loading-text">INITIALIZING...</div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-30 top-0 bg-white shadow-md" data-aos="fade-down" data-aos-duration="1000">
+        <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-4 px-6">
+            <div class="flex items-center">
+                <a class="text-2xl font-bold text-brand-blue hover:text-blue-700 transition duration-300" href="#top">
+                    Pranav Kulkarni
+                </a>
+            </div>
+            <div class="flex space-x-4">
+                <a href="#about" class="text-gray-600 hover:text-brand-blue transition duration-300">About</a>
+                <a href="#projects" class="text-gray-600 hover:text-brand-blue transition duration-300">Projects</a>
+                <a href="#contact" class="text-gray-600 hover:text-brand-blue transition duration-300">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div id="top" class="pt-24 md:pt-36 bg-gradient-to-r from-blue-50 to-white relative">
+        <div id="particles-js"></div>
+        <div class="container px-6 mx-auto flex flex-wrap flex-col md:flex-row items-center content-wrapper">
+            <div class="flex flex-col w-full md:w-2/3 justify-center items-start text-center md:text-left" data-aos="fade-right" data-aos-duration="1000">
+                <h1 class="my-4 text-5xl font-bold leading-tight text-brand-blue typing-text">
+                    Hi, I'm Pranav Dnyaneshwar Kulkarni
+                </h1>
+                <p class="leading-normal text-2xl mb-8 text-gray-600 typing-text" style="animation-delay: 2s;">
+                    Senior Engineer at Tata Consulting Engineers | M.Tech. Electronics & Electrical Technology
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#contact" class="bg-brand-blue text-white font-bold py-3 px-6 rounded-full hover:bg-blue-700 transition duration-300 transform hover:scale-105">
+                        Get In Touch
+                    </a>
+                    <a href="#projects" class="bg-gray-200 text-gray-800 font-bold py-3 px-6 rounded-full hover:bg-gray-300 transition duration-300 transform hover:scale-105">
+                        View Projects
+                    </a>
+                </div>
+            </div>
+            <div class="w-full md:w-1/3 py-6 text-center" data-aos="fade-left" data-aos-duration="1000">
+                <img class="w-80 h-80 mx-auto rounded-full shadow-lg object-contain object-center bg-white p-2 animate-float" src="assets/profile.jpg" alt="Pranav Kulkarni">
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="bg-white py-16">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 text-brand-blue" data-aos="fade-up">About Me</h2>
+            <div class="flex flex-wrap items-center">
+                <div class="w-full md:w-1/2 px-4" data-aos="fade-right" data-aos-delay="200">
+                    <p class="text-gray-600 mb-4">
+                        Currently working as a Senior Engineer at Tata Consulting Engineers Pvt Limited with 1.1 years of experience. 
+                        I am a creative & results-driven M.Tech. (Electronics & Electrical Technology) professional with a total experience of nearly 4 years. 
+                        My expertise lies in Machine Learning, data mining, and software development, with a keen interest in automating processes and performing statistical analysis.
+                    </p>
+                    <p class="text-gray-600">
+                        I am proficient in C, Python, MATLAB, and Windows software development. With a strong foundation in Operating Systems coding techniques, 
+                        Internet Protocol (IP), interfaces, and hardware subsystems, I bring a comprehensive technical skill set to every project.
+                    </p>
+                    <div class="mt-6">
+                        <p class="text-gray-600 mb-2">
+                            <i class="fas fa-envelope mr-2"></i> pranavk2050@gmail.com
+                        </p>
+                        <p class="text-gray-600">
+                            <i class="fas fa-phone mr-2"></i> +91-9096810908
+                        </p>
+                    </div>
+                    <div class="mt-6 flex space-x-4">
+                        <a href="https://www.linkedin.com/in/pranav-kulkarni-110690/" target="_blank" class="text-gray-700 hover:text-brand-blue">
+                            <i class="fab fa-linkedin text-3xl"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2 px-4" data-aos="fade-left" data-aos-delay="400">
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h3 class="text-2xl font-semibold mb-4 text-brand-blue">Skills</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Python</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">C</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">MATLAB</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Machine Learning</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Data Mining</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Statistical Analysis</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Operating Systems</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Windows Development</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="bg-gray-50 py-16">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 text-brand-blue" data-aos="fade-up">Skills & Expertise</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Programming Languages -->
+                <div class="bg-white p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-xl font-semibold mb-6 text-brand-blue">Programming Languages</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-700">Python</span>
+                                <span class="text-brand-blue">90%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 skill-bar">
+                                <div class="bg-brand-blue h-2 rounded-full transition-all duration-500 skill-progress" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-700">C</span>
+                                <span class="text-brand-blue">85%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 skill-bar">
+                                <div class="bg-brand-blue h-2 rounded-full transition-all duration-500 skill-progress" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-700">MATLAB</span>
+                                <span class="text-brand-blue">80%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 skill-bar">
+                                <div class="bg-brand-blue h-2 rounded-full transition-all duration-500 skill-progress" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Technologies -->
+                <div class="bg-white p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-xl font-semibold mb-6 text-brand-blue">Technologies</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-700">Machine Learning</span>
+                                <span class="text-brand-blue">85%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 skill-bar">
+                                <div class="bg-brand-blue h-2 rounded-full transition-all duration-500 skill-progress" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-700">OpenCV</span>
+                                <span class="text-brand-blue">80%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 skill-bar">
+                                <div class="bg-brand-blue h-2 rounded-full transition-all duration-500 skill-progress" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-700">Data Mining</span>
+                                <span class="text-brand-blue">75%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 skill-bar">
+                                <div class="bg-brand-blue h-2 rounded-full transition-all duration-500 skill-progress" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Hardware & Tools -->
+                <div class="bg-white p-6 rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="text-xl font-semibold mb-6 text-brand-blue">Hardware & Tools</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-700">HFSS</span>
+                                <span class="text-brand-blue">85%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 skill-bar">
+                                <div class="bg-brand-blue h-2 rounded-full transition-all duration-500 skill-progress" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-700">STM32</span>
+                                <span class="text-brand-blue">80%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 skill-bar">
+                                <div class="bg-brand-blue h-2 rounded-full transition-all duration-500 skill-progress" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-700">Embedded Systems</span>
+                                <span class="text-brand-blue">75%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 skill-bar">
+                                <div class="bg-brand-blue h-2 rounded-full transition-all duration-500 skill-progress" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <!-- Projects Section -->
+    <section id="projects" class="bg-gray-100 py-16">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 text-brand-blue" data-aos="fade-up">My Projects</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Traffic Video Analysis -->
+                <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-2xl font-semibold mb-4 text-brand-blue">Traffic Video Analysis</h3>
+                    <p class="text-gray-600 mb-4">Dec'20-Feb'21</p>
+                    <p class="text-gray-600 mb-4">Implemented vehicle detection and tracking system using Computer Vision and Deep Learning.</p>
+                    <ul class="list-disc list-inside text-gray-600 mb-4">
+                        <li>Database creation and Image Annotation</li>
+                        <li>Training with Yolov4, DeepSort framework</li>
+                        <li>Vehicle Detection, Tracking, and Speed Estimation</li>
+                    </ul>
+                </div>
+
+                <!-- Pigeon Detection -->
+                <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-2xl font-semibold mb-4 text-brand-blue">Pigeon Detection using Computer Vision</h3>
+                    <p class="text-gray-600 mb-4">Aug'20-Nov'20</p>
+                    <p class="text-gray-600 mb-4">Developed and deployed a computer vision system for pigeon detection.</p>
+                    <ul class="list-disc list-inside text-gray-600 mb-4">
+                        <li>Database creation and Image Annotation</li>
+                        <li>Training yolov5 Model and Testing</li>
+                        <li>Deployment to NVidia Jetson Nano with GPU</li>
+                        <li>TensorRT optimization</li>
+                    </ul>
+                </div>
+
+                <!-- Mercedes Benz Project -->
+                <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="text-2xl font-semibold mb-4 text-brand-blue">Mercedes Benz-Greener Manufacturing</h3>
+                    <p class="text-gray-600 mb-4">Simplilearn (Online)</p>
+                    <ul class="list-disc list-inside text-gray-600 mb-4">
+                        <li>Data Cleaning and EDA</li>
+                        <li>Managed Categorical Data</li>
+                        <li>Dimensionality Reduction using PCA</li>
+                        <li>Training with XGBoost and prediction</li>
+                    </ul>
+                </div>
+
+                <!-- Movielens Case Study -->
+                <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="400">
+                    <h3 class="text-2xl font-semibold mb-4 text-brand-blue">Movielens Case Study</h3>
+                    <p class="text-gray-600 mb-4">Simplilearn (Online)</p>
+                    <p class="text-gray-600 mb-4">Performed analysis to predict movie ratings using data analysis techniques.</p>
+                    <ul class="list-disc list-inside text-gray-600">
+                        <li>Exploratory Data Analysis</li>
+                        <li>Feature selection and engineering</li>
+                        <li>Rating prediction model development</li>
+                    </ul>
+                </div>
+
+                <!-- UDS Services Implementation -->
+                <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="500">
+                    <h3 class="text-2xl font-semibold mb-4 text-brand-blue">UDS Services Implementation</h3>
+                    <p class="text-gray-600 mb-4">Electray Technologies Private Limited | 3 Months</p>
+                    <p class="text-gray-600 mb-4">Climate Control Module Development</p>
+                    <ul class="list-disc list-inside text-gray-600">
+                        <li>Managed implementation of UDS services using embedded C</li>
+                        <li>Performed unit testing and functional testing</li>
+                    </ul>
+                </div>
+
+                <!-- CAN Driver Implementation -->
+                <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="600">
+                    <h3 class="text-2xl font-semibold mb-4 text-brand-blue">CAN Driver Implementation</h3>
+                    <p class="text-gray-600 mb-4">Electray Technologies Private Limited | 3 Months</p>
+                    <p class="text-gray-600 mb-4">Embedded Software Engineer Trainee</p>
+                    <ul class="list-disc list-inside text-gray-600">
+                        <li>Implemented CAN driver for Renesas RL78 R5F10PPJ board</li>
+                        <li>Created UTP and FTP documentation</li>
+                        <li>Performed unit and functional testing</li>
+                    </ul>
+                </div>
+
+                <!-- Bio-Potential Signal Analyzer -->
+                <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-2xl font-semibold mb-4 text-brand-blue">Bio-Potential Signal Analyzer</h3>
+                    <p class="text-gray-600 mb-4">DeeDee Labs Private Limited, Pune | 1 year</p>
+                    <p class="text-gray-600 mb-4">Software and Hardware Integration Project</p>
+                    <ul class="list-disc list-inside text-gray-600">
+                        <li>Software integration with hardware and GUI creation using Python</li>
+                        <li>Hardware Design and Firmware implementation</li>
+                        <li>Worked on UART, SPI, USB interfaces of STM32F411VE board</li>
+                        <li>Schematic and Layout design of front-end IC ADS1299 module</li>
+                        <li>Managed integration of hardware specific driver to OpenVibe</li>
+                        <li>Implemented image processing application using OpenCV with Android integration</li>
+                    </ul>
+                </div>
+
+                <!-- Optical Character Recognition -->
+                <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-2xl font-semibold mb-4 text-brand-blue">Optical Character Recognition (OCR)</h3>
+                    <p class="text-gray-600 mb-4">Persistent Systems Limited, Pune | 4 months</p>
+                    <p class="text-gray-600 mb-4">May'16- Aug'16</p>
+                    <ul class="list-disc list-inside text-gray-600">
+                        <li>Conversion of MATLAB mex functions to C</li>
+                        <li>Image pre-processing including filtering and segmentation</li>
+                        <li>Recognized hand written English capital letters</li>
+                        <li>Created searchable PDF output</li>
+                        <li>Used OpenCV on Visual Studio for implementation</li>
+                    </ul>
+                </div>
+
+                <!-- Shadow Detection -->
+                <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="text-2xl font-semibold mb-4 text-brand-blue">Shadow Detection in Video using OpenCV</h3>
+                    <p class="text-gray-600 mb-4">Persistent Systems Limited, Pune | 2 months</p>
+                    <p class="text-gray-600 mb-4">Mar'16-Apr'16</p>
+                    <ul class="list-disc list-inside text-gray-600">
+                        <li>Applied image processing methods to detect and remove shadows in surveillance video</li>
+                        <li>Retrieved HSV, YCbCr component and intensity image formation</li>
+                        <li>Implemented using C and OpenCV on Visual Studio</li>
+                    </ul>
+                </div>
+
+                <!-- No Reference Quality Analysis -->
+                <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="400">
+                    <h3 class="text-2xl font-semibold mb-4 text-brand-blue">No Reference Quality Analysis of Medical Fused Images</h3>
+                    <p class="text-gray-600 mb-4">M.Tech. Project | 1 year</p>
+                    <ul class="list-disc list-inside text-gray-600">
+                        <li>Complete project from literature survey to implementation</li>
+                        <li>CT and MRI images are used together using discrete wavelet transform</li>
+                        <li>Extracted statistical features from images using Support Vector Machines and Neural Network</li>
+                        <li>Implemented mean opinion score to determine image quality</li>
+                        <li>Used MATLAB 2013a for implementation</li>
+                    </ul>
+                </div>
+                
+                <!-- Sierpinski Carpet Fractal Antenna -->
+                <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="500">
+                    <h3 class="text-2xl font-semibold mb-4 text-brand-blue">Design of Sierpinski Carpet Fractal Antenna</h3>
+                    <p class="text-gray-600 mb-4">B.E. Project | 1 year</p>
+                    <ul class="list-disc list-inside text-gray-600">
+                        <li>Testing and design of antenna using HFSS (High frequency structure simulator)</li>
+                        <li>Developed single antenna for multiple frequency bands</li>
+                        <li>Implemented carpet fractal antenna with central frequency of 2.4Ghz for wireless LAN</li>
+                        <li>Used High Frequency Structure Simulator (HFSS) for implementation</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="bg-white py-16">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 text-brand-blue" data-aos="fade-up">Contact Me</h2>
+            <div class="max-w-lg mx-auto" data-aos="zoom-in" data-aos-delay="200">
+                <form class="bg-gray-100 p-8 rounded-lg shadow-md">
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Name</label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700" id="name" type="text" placeholder="Your Name">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email</label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700" id="email" type="email" placeholder="Your Email">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="message">Message</label>
+                        <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 h-32" id="message" placeholder="Your Message"></textarea>
+                    </div>
+                    <div class="flex items-center justify-center">
+                        <button class="bg-brand-blue text-white font-bold py-2 px-6 rounded-full hover:bg-blue-700 transition duration-300" type="button">
+                            Send Message
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2024 Pranav Kulkarni. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+    </script>
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS.load('particles-js', 'particles.json', function() {
+            console.log('particles.json loaded...');
+        });
+    </script>
+</body>
+</html>
