@@ -23,52 +23,64 @@
         /* Base styles */
         html {
             scroll-behavior: smooth;
-            overflow-x: hidden; /* Prevent horizontal scroll */
+            overflow-x: hidden;
         }
 
         body {
-            overflow-x: hidden; /* Prevent horizontal scroll */
-        }
-
-        /* Mobile-first responsive text sizes */
-        h2 {
-            font-size: 1.875rem !important; /* 30px */
-            line-height: 2.25rem !important;
+            overflow-x: hidden;
         }
 
         /* Header text responsiveness */
         .header-title {
-            font-size: 1.25rem !important; /* 20px */
+            font-size: 1.25rem !important;
             line-height: 1.75rem !important;
             word-wrap: break-word !important;
             max-width: 100% !important;
             padding: 0 1rem !important;
+            margin-bottom: 1rem !important;
         }
 
         .header-subtitle {
-            font-size: 0.875rem !important; /* 14px - even smaller for mobile */
+            font-size: 0.875rem !important;
             line-height: 1.25rem !important;
             word-wrap: break-word !important;
             max-width: 100% !important;
             padding: 0 1rem !important;
-            white-space: normal !important; /* Ensure text wraps */
-            display: block !important; /* Ensure full width */
+            white-space: normal !important;
+            display: block !important;
+            color: #9CA3AF !important;
+        }
+
+        .header-container {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            min-height: 100vh !important;
+            width: 100% !important;
+            max-width: 1200px !important;
+            margin: 0 auto !important;
+            padding: 2rem 1rem !important;
         }
 
         @media (min-width: 768px) {
             .header-title {
-                font-size: 1.875rem !important; /* 30px */
-                line-height: 2.25rem !important;
+                font-size: 3.5rem !important; /* 56px */
+                line-height: 4rem !important;
                 padding: 0 !important;
+                margin-bottom: 1.5rem !important;
             }
             .header-subtitle {
-                font-size: 1.25rem !important; /* 20px */
-                line-height: 1.75rem !important;
+                font-size: 1.5rem !important; /* 24px */
+                line-height: 2rem !important;
                 padding: 0 !important;
             }
-            h2 {
-                font-size: 2.25rem !important; /* 36px */
-                line-height: 2.5rem !important;
+            .header-subtitle-line {
+                display: inline !important;
+            }
+            .header-subtitle-separator {
+                display: inline !important;
+                margin: 0 0.5rem !important;
             }
         }
 
@@ -392,31 +404,27 @@
     </nav>
 
     <!-- Hero Section with ID for scroll-to-top -->
-    <section id="top" class="relative min-h-screen bg-gray-900 text-white flex items-center">
-        <div id="particles-js"></div>
-        <div class="container px-6 mx-auto flex flex-wrap flex-col md:flex-row items-center content-wrapper">
-            <div class="flex flex-col w-full md:w-2/3 justify-center items-start text-center md:text-left" data-aos="fade-right" data-aos-duration="1000">
-                <h1 class="my-4 text-5xl font-bold leading-tight text-brand-blue typing-text header-title">
-                    Hi, I'm Pranav Dnyaneshwar Kulkarni
-                </h1>
-                <div class="header-subtitle text-lg md:text-2xl mb-8 text-gray-300" data-aos="fade-up" data-aos-delay="200">
-                    <div>Senior Engineer at Tata Consulting Engineers</div>
-                    <div class="mt-2">M.Tech. Electronics & Electrical Technology</div>
-                </div>
-                <div class="flex space-x-4">
-                    <a href="#contact" class="bg-brand-blue text-white font-bold py-3 px-6 rounded-full hover:bg-blue-700 transition duration-300 transform hover:scale-105">
-                        Get In Touch
-                    </a>
-                    <a href="#projects" class="bg-gray-200 text-gray-800 font-bold py-3 px-6 rounded-full hover:bg-gray-300 transition duration-300 transform hover:scale-105">
-                        View Projects
-                    </a>
-                </div>
+    <header class="min-h-screen flex items-center justify-center bg-gray-900 text-white relative overflow-hidden">
+        <div id="particles-js" class="absolute inset-0"></div>
+        <div class="header-container">
+            <h1 class="header-title text-center typing-text" data-aos="fade-up">
+                Hi, I am Pranav Dnyaneshwar Kulkarni
+            </h1>
+            <div class="header-subtitle text-center" data-aos="fade-up" data-aos-delay="200">
+                <span class="header-subtitle-line">Senior Engineer at Tata Consulting Engineers</span>
+                <span class="header-subtitle-separator hidden md:inline">|</span>
+                <span class="header-subtitle-line">M.Tech. Electronics & Electrical Technology</span>
             </div>
-            <div class="w-full md:w-1/3 py-6 text-center" data-aos="fade-left" data-aos-duration="1000">
-                <img class="w-80 h-80 mx-auto rounded-full shadow-lg object-contain object-center bg-white p-2 animate-float" src="assets/profile.png" alt="Pranav Kulkarni">
+            <div class="flex space-x-4 mt-8">
+                <a href="#contact" class="bg-brand-blue text-white font-bold py-3 px-6 rounded-full hover:bg-blue-700 transition duration-300 transform hover:scale-105">
+                    Get In Touch
+                </a>
+                <a href="#about" class="border-2 border-brand-blue text-brand-blue font-bold py-3 px-6 rounded-full hover:bg-brand-blue hover:text-white transition duration-300 transform hover:scale-105">
+                    Learn More
+                </a>
             </div>
         </div>
-    </section>
+    </header>
 
     <!-- About Section -->
     <section id="about" class="bg-white py-12 md:py-16">
