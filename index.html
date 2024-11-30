@@ -41,12 +41,28 @@
             font-size: 1.25rem !important; /* 20px */
             line-height: 1.75rem !important;
             word-wrap: break-word !important;
+            max-width: 100% !important;
+            padding: 0 1rem !important;
+        }
+
+        .header-subtitle {
+            font-size: 1rem !important; /* 16px */
+            line-height: 1.5rem !important;
+            word-wrap: break-word !important;
+            max-width: 100% !important;
+            padding: 0 1rem !important;
         }
 
         @media (min-width: 768px) {
             .header-title {
                 font-size: 1.875rem !important; /* 30px */
                 line-height: 2.25rem !important;
+                padding: 0 !important;
+            }
+            .header-subtitle {
+                font-size: 1.25rem !important; /* 20px */
+                line-height: 1.75rem !important;
+                padding: 0 !important;
             }
             h2 {
                 font-size: 2.25rem !important; /* 36px */
@@ -329,8 +345,8 @@
                 <h1 class="my-4 text-5xl font-bold leading-tight text-brand-blue typing-text header-title">
                     Hi, I'm Pranav Dnyaneshwar Kulkarni
                 </h1>
-                <p class="leading-normal text-2xl mb-8 text-gray-600 typing-text header-title" style="animation-delay: 2s;">
-                    Senior Engineer at Tata Consulting Engineers | M.Tech. Electronics & Electrical Technology
+                <p class="leading-normal text-2xl mb-8 text-gray-600 typing-text header-subtitle" style="animation-delay: 2s;">
+                    Senior Engineer at Tata Consulting Engineers <br class="hidden sm:block" /> M.Tech. Electronics & Electrical Technology
                 </p>
                 <div class="flex space-x-4">
                     <a href="#contact" class="bg-brand-blue text-white font-bold py-3 px-6 rounded-full hover:bg-blue-700 transition duration-300 transform hover:scale-105">
