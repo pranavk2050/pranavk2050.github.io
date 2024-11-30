@@ -49,6 +49,18 @@
             white-space: normal !important;
             display: block !important;
             color: #9CA3AF !important;
+            margin-bottom: 2rem !important;
+        }
+
+        .profile-image {
+            width: 200px !important;
+            height: 200px !important;
+            border-radius: 50% !important;
+            margin: 2rem auto !important;
+            border: 4px solid #3B82F6 !important;
+            background-color: white !important;
+            padding: 4px !important;
+            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.25) !important;
         }
 
         .header-container {
@@ -65,15 +77,16 @@
 
         @media (min-width: 768px) {
             .header-title {
-                font-size: 3.5rem !important; /* 56px */
+                font-size: 3.5rem !important;
                 line-height: 4rem !important;
                 padding: 0 !important;
                 margin-bottom: 1.5rem !important;
             }
             .header-subtitle {
-                font-size: 1.5rem !important; /* 24px */
+                font-size: 1.5rem !important;
                 line-height: 2rem !important;
                 padding: 0 !important;
+                margin-bottom: 3rem !important;
             }
             .header-subtitle-line {
                 display: inline !important;
@@ -81,6 +94,11 @@
             .header-subtitle-separator {
                 display: inline !important;
                 margin: 0 0.5rem !important;
+            }
+            .profile-image {
+                width: 250px !important;
+                height: 250px !important;
+                margin: 3rem auto !important;
             }
         }
 
@@ -407,6 +425,7 @@
     <header class="min-h-screen flex items-center justify-center bg-gray-900 text-white relative overflow-hidden">
         <div id="particles-js" class="absolute inset-0"></div>
         <div class="header-container">
+            <img src="profile.jpg" alt="Pranav Kulkarni" class="profile-image animate-float" data-aos="zoom-in">
             <h1 class="header-title text-center typing-text" data-aos="fade-up">
                 Hi, I am Pranav Dnyaneshwar Kulkarni
             </h1>
