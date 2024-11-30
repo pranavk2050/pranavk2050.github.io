@@ -46,11 +46,13 @@
         }
 
         .header-subtitle {
-            font-size: 1rem !important; /* 16px */
-            line-height: 1.5rem !important;
+            font-size: 0.875rem !important; /* 14px - even smaller for mobile */
+            line-height: 1.25rem !important;
             word-wrap: break-word !important;
             max-width: 100% !important;
             padding: 0 1rem !important;
+            white-space: normal !important; /* Ensure text wraps */
+            display: block !important; /* Ensure full width */
         }
 
         @media (min-width: 768px) {
@@ -299,6 +301,43 @@
             opacity: 0;
             pointer-events: none;
         }
+
+        /* Mobile Navigation Styles */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(17, 24, 39, 0.95);
+            z-index: 50;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .menu-toggle {
+            display: block;
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 60;
+            padding: 0.5rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        @media (min-width: 768px) {
+            .menu-toggle {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans leading-normal tracking-normal">
@@ -312,6 +351,24 @@
             </div>
             <div class="loading-text">INITIALIZING...</div>
         </div>
+    </div>
+
+    <!-- Mobile Menu Toggle Button -->
+    <button class="menu-toggle text-gray-800 md:hidden">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+    </button>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <nav class="flex flex-col items-center space-y-6 py-8">
+            <a href="#about" class="text-white text-xl hover:text-brand-blue transition duration-300">About</a>
+            <a href="#certifications" class="text-white text-xl hover:text-brand-blue transition duration-300">Certifications</a>
+            <a href="#skills" class="text-white text-xl hover:text-brand-blue transition duration-300">Skills</a>
+            <a href="#projects" class="text-white text-xl hover:text-brand-blue transition duration-300">Projects</a>
+            <a href="#contact" class="text-white text-xl hover:text-brand-blue transition duration-300">Contact</a>
+        </nav>
     </div>
 
     <!-- Navigation -->
@@ -329,9 +386,6 @@
                     <a href="#contact" class="text-gray-600 hover:text-brand-blue transition duration-300">Contact</a>
                 </div>
                 <div class="md:hidden">
-                    <button class="text-gray-600 hover:text-brand-blue focus:outline-none">
-                        <i class="fas fa-bars"></i>
-                    </button>
                 </div>
             </div>
         </div>
@@ -345,9 +399,10 @@
                 <h1 class="my-4 text-5xl font-bold leading-tight text-brand-blue typing-text header-title">
                     Hi, I'm Pranav Dnyaneshwar Kulkarni
                 </h1>
-                <p class="leading-normal text-2xl mb-8 text-gray-600 typing-text header-subtitle" style="animation-delay: 2s;">
-                    Senior Engineer at Tata Consulting Engineers <br class="hidden sm:block" /> M.Tech. Electronics & Electrical Technology
-                </p>
+                <div class="header-subtitle text-lg md:text-2xl mb-8 text-gray-300" data-aos="fade-up" data-aos-delay="200">
+                    <div>Senior Engineer at Tata Consulting Engineers</div>
+                    <div class="mt-2">M.Tech. Electronics & Electrical Technology</div>
+                </div>
                 <div class="flex space-x-4">
                     <a href="#contact" class="bg-brand-blue text-white font-bold py-3 px-6 rounded-full hover:bg-blue-700 transition duration-300 transform hover:scale-105">
                         Get In Touch
@@ -826,6 +881,28 @@
     <script>
         particlesJS.load('particles-js', 'particles.json', function() {
             console.log('particles.json loaded...');
+        });
+    </script>
+    <script>
+        // Add this script for mobile menu functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const menuLinks = document.querySelectorAll('.mobile-menu a');
+
+            if (menuToggle && mobileMenu) {
+                menuToggle.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('active');
+                    document.body.classList.toggle('overflow-hidden');
+                });
+
+                menuLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileMenu.classList.remove('active');
+                        document.body.classList.remove('overflow-hidden');
+                    });
+                });
+            }
         });
     </script>
 </body>
