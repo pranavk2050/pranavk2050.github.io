@@ -23,6 +23,35 @@
         /* Base styles */
         html {
             scroll-behavior: smooth;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        body {
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        /* Mobile-first responsive text sizes */
+        h2 {
+            font-size: 1.875rem !important; /* 30px */
+            line-height: 2.25rem !important;
+        }
+
+        /* Header text responsiveness */
+        .header-title {
+            font-size: 1.25rem !important; /* 20px */
+            line-height: 1.75rem !important;
+            word-wrap: break-word !important;
+        }
+
+        @media (min-width: 768px) {
+            .header-title {
+                font-size: 1.875rem !important; /* 30px */
+                line-height: 2.25rem !important;
+            }
+            h2 {
+                font-size: 2.25rem !important; /* 36px */
+                line-height: 2.5rem !important;
+            }
         }
 
         /* Mobile-first responsive text sizes */
@@ -297,10 +326,10 @@
         <div id="particles-js"></div>
         <div class="container px-6 mx-auto flex flex-wrap flex-col md:flex-row items-center content-wrapper">
             <div class="flex flex-col w-full md:w-2/3 justify-center items-start text-center md:text-left" data-aos="fade-right" data-aos-duration="1000">
-                <h1 class="my-4 text-5xl font-bold leading-tight text-brand-blue typing-text">
+                <h1 class="my-4 text-5xl font-bold leading-tight text-brand-blue typing-text header-title">
                     Hi, I'm Pranav Dnyaneshwar Kulkarni
                 </h1>
-                <p class="leading-normal text-2xl mb-8 text-gray-600 typing-text" style="animation-delay: 2s;">
+                <p class="leading-normal text-2xl mb-8 text-gray-600 typing-text header-title" style="animation-delay: 2s;">
                     Senior Engineer at Tata Consulting Engineers | M.Tech. Electronics & Electrical Technology
                 </p>
                 <div class="flex space-x-4">
